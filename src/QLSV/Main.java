@@ -12,7 +12,8 @@ public class Main {
             System.out.println("1. Them SinhVien");
             System.out.println("2. Sua SinhVien bang ID");
             System.out.println("3. Xoa SinhVien bang ID");
-            System.out.println("4. Hien thi tat ca SinhVien");
+            System.out.println("4. Hien thi SinhVien theo ID");
+            System.out.println("5. Hien thi tat ca SinhVien");
             System.out.println("0. Thoat");
             System.out.println("--------------------------------");
             System.out.print("Hay chon: ");
@@ -28,16 +29,18 @@ public class Main {
                     displayDelete(studentManager, scanner);
                     break;
                 case 4:
-                    studentManager.display();
+                    displayOneStudent(studentManager,scanner);
                     break;
+                case  5:
+                    studentManager.display();
             }
         } while (choice != 0);
     }
-    public static void displayEdit(StudentManager StudentManager, Scanner scanner) {
+    public static void displayEdit(StudentManager studentManager, Scanner scanner) {
         System.out.print("Nhap ID can thay doi: ");
         int editId = scanner.nextInt();
         scanner.nextLine();
-        boolean checkEdit = StudentManager.updateEdit(editId, scanner);
+        boolean checkEdit = studentManager.updateEdit(editId, scanner);
         if (checkEdit) {
             System.out.println("Thay doi thanh cong !");
         } else {
@@ -45,15 +48,22 @@ public class Main {
         }
     }
 
-    public static void displayDelete(StudentManager StudentManager, Scanner scanner) {
+    public static void displayDelete(StudentManager studentManager, Scanner scanner) {
         System.out.print("Nhap ID can xoa: ");
         int deleteId = scanner.nextInt();
         scanner.nextLine();
-        boolean checkDelete = StudentManager.deleteStudent(deleteId);
+        boolean checkDelete = studentManager.deleteStudent(deleteId);
         if (checkDelete) {
             System.out.println("Xoa thanh cong !");
         } else {
             System.out.println(" Khong ton tai !" );
+        }
+    }
+    private static void displayOneStudent(StudentManager studentManager, Scanner scanner) {
+        System.out.print("Nhap ID SinhVien muon hien thi: ");
+        int displayID = scanner.nextInt();
+        if (!studentManager.displayOne(displayID)) {
+            System.out.println(" Khong ton tai !");
         }
     }
 }

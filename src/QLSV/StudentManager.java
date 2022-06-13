@@ -85,8 +85,15 @@ public class StudentManager {
     }
 
     public void display() {
-        for (Student b : studentArray) {
-            System.out.println(b);
+        for (Student student : studentArray) {
+            System.out.println(student);
         }
+    }
+    public boolean displayOne(int id) {
+        if (this.checkId(id) != -1) {
+            System.out.println(studentArray[this.checkId(id)]);
+            return true;
+        }
+        return false;
     }
 }
