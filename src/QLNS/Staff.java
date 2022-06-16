@@ -1,66 +1,46 @@
-package test;
+package QLNS;
 
 public class Staff {
-    private int maso;
-    private String ten;
-    private int tuoi;
-    private String gioitinh;
-    private int luong;
-    public Staff(int maso, String ten, int tuoi, String gioitinh, int luong) {
-        this.maso = maso;
-        this.ten = ten;
-        this.tuoi = tuoi;
-        this.gioitinh = gioitinh;
-        this.luong = luong;
+    private String name;
+    private int age;
+    private double salary;
+
+    public Staff(String name, int age, double salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
     }
 
-    public int getMaso() {
-        return maso;
+    public String getName() {
+        return name;
     }
 
-    public void setMaso(int maso) {
-        this.maso = maso;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTen() {
-        return ten;
+    public int getAge() {
+        return age;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public int getTuoi() {
-        return tuoi;
+    public double getSalary() {
+        return salary;
     }
 
-    public void setTuoi(int tuoi) {
-        this.tuoi = tuoi;
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
-    public String getGioitinh() {
-        return gioitinh;
-    }
-
-    public void setGioitinh(String gioitinh) {
-        this.gioitinh = gioitinh;
-    }
-
-    public int getLuong() {
-        return luong;
-    }
-
-    public void setLuong(int luong) {
-        this.luong = luong;
-    }
-        @Override
+    @Override
     public String toString() {
         return "Staff{" +
-                "maso=" + maso +
-                ", ten='" + ten + '\'' +
-                ", tuoi=" + tuoi +
-                ", gioitinh='" + gioitinh + '\'' +
-                ", luong=" + luong +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", salary=" + salary +
                 '}';
     }
 }

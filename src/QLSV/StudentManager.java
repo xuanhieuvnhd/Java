@@ -5,24 +5,35 @@ import java.util.Scanner;
 public class StudentManager {
     Student[] studentArray = new Student[]{};
 
-    public void addStudent(Scanner scanner) {
-        Student student = creatStudent(scanner);
-        Student[] newStudent = new Student[studentArray.length + 1];
-        System.arraycopy(this.studentArray, 0, newStudent, 0, studentArray.length);
-        newStudent[newStudent.length - 1] = student;
-        this.studentArray = newStudent;
+    public void addStudent() {
+        Student student = creatStudent();
+        boolean flag = true;
+        for (int i = 0; i < this.studentArray.length; i++) {
+            if (this.studentArray[i].getId() == student.getId()) {
+                flag = false;
+            }
+        }
+        if (flag == true) {
+            Student[] newStudent = new Student[studentArray.length + 1];
+            System.arraycopy(this.studentArray, 0, newStudent, 0, studentArray.length);
+            newStudent[newStudent.length - 1] = student;
+            this.studentArray = newStudent;
+            System.out.println("Them SinhVien thanh cong !");
+        } else {
+            System.out.println("Ma so SinhVien da ton tai !");
+            System.out.println("Vui long nhap lai: ");
+        }
     }
 
-    public Student creatStudent(Scanner scanner) {
+    public Student creatStudent() {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Nhap ten SinhVien: ");
-        scanner.nextLine();
-        String name = scanner.nextLine();
+        String name = scanner.next();
         System.out.print("Nhap tuoi SinhVien: ");
         int age = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Nhap gioi tinh Sinh Vien: ");
-        String gender = scanner.nextLine();
-        System.out.print("Nhap ID SinhVien: ");
+        System.out.print("Nhap gioi tinh SinhVien: ");
+        String gender = scanner.next();
+        System.out.print("Nhap ma so SinhVien: ");
         int id = scanner.nextInt();
         return new Student(name, age, gender, id);
     }
@@ -68,6 +79,18 @@ public class StudentManager {
         return new Student(student.getId(), name, age, gender);
     }
 
+    public void editStudentById() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhap ID can thay doi: ");
+        int editId = scanner.nextInt();
+        boolean checkEdit = updateEdit(editId, scanner);
+        if (checkEdit) {
+            System.out.println("Thay doi thanh cong !");
+        } else {
+            System.out.println(" Khong ton tai !");
+        }
+    }
+
     public boolean deleteStudent(int id) {
         if (this.checkId(id) != -1) {
             Student[] studentDelete = new Student[this.studentArray.length - 1];
@@ -84,16 +107,50 @@ public class StudentManager {
         return false;
     }
 
-    public void display() {
+    public void displayStudentAll() {
         for (Student student : studentArray) {
             System.out.println(student);
         }
     }
+
     public boolean displayOne(int id) {
         if (this.checkId(id) != -1) {
             System.out.println(studentArray[this.checkId(id)]);
             return true;
         }
         return false;
+    }
+
+    public void deleteStudentById() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhap ID can xoa: ");
+        int deleteId = scanner.nextInt();
+        scanner.nextLine();
+        boolean checkDelete = deleteStudent(deleteId);
+        if (checkDelete) {
+            System.out.println("Xoa thanh cong !");
+        } else {
+            System.out.println(" Khong ton tai !");
+        }
+    }
+
+    public void displayStudentById() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhap ID SinhVien muon hien thi: ");
+        int displayID = scanner.nextInt();
+        if (!displayOne(displayID)) {
+            System.out.println(" Khong ton tai !");
+        }
+    }
+
+    public void searchStudent() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhap ID SinhVien muon tim: ");
+        int search = scanner.nextInt();
+        for (int i = 0; i < this.studentArray.length; i++) {
+            if (!displayOne(search)) {
+                System.out.println(" Khong ton tai !");
+            }
+        }
     }
 }

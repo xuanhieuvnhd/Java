@@ -1,78 +1,88 @@
-package test;
+package QLNS;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Staffmanager {
-    Staff[] staffs;
-    int index = 0;
+    private ArrayList<Staff> staffs;
 
-    public Staff creatStaff(Scanner input) {
-        System.out.print("Nhap ma so: ");
-        int maso = input.nextInt();
-        System.out.print("Nhap ten: ");
-        String ten = input.next();
-        System.out.print("Nhap tuoi: ");
-        int tuoi = input.nextInt();
-        System.out.print("Nhap gioi tinh: ");
-        String gioitinh = input.next();
-        System.out.print("Nhap luong: ");
-        int luong = input.nextInt();
-        return new Staff(maso, ten, tuoi, gioitinh, luong);
+    public Staffmanager() {
+        staffs = new ArrayList<>();
     }
 
-    public Staff addStaff(Scanner input1) {
-        Staff staff = creatStaff(input1);
-        staffs[index] = staff;
-        index++;
-        return staff;
-    }
-
-    public void arrayNew() {
+    public Staff creatStaff() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Nhap so luong nhan vien: ");
-        int length = scanner.nextInt();
-        staffs = new Staff[length];
-        for (int i = 0; i < staffs.length; i++) {
-            addStaff(scanner);
+        System.out.print("Ho va ten: ");
+        String name = scanner.next();
+        System.out.print("Tuoi: ");
+        int age = scanner.nextInt();
+        System.out.print("Nhap luong: ");
+        double salary = scanner.nextDouble();
+        return new Staff(name,age,salary);
+    }
+
+    public void addStaff() {
+        Staff staff = creatStaff();
+        staffs.add(staff);
+    }
+
+    public void addStaffByIndex() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhap vi tri muon them: ");
+        int index = scanner.nextInt();
+        if (index < 0 || index >= staffs.size()){
+            System.out.println("Vi tri khong phu hop !");
+        }else {
+            Staff staff = creatStaff();
+            staffs.add(index, staff);
         }
     }
-
-    public void editStaff(Scanner input2) {
-        Staff staff = creatStaff(input2);
-        Scanner input = new Scanner(System.in);
-        System.out.print("Nhap ten moi cua nhan vien: ");
-        String ten = input.nextLine();
-        staff.setTen(ten);
-        System.out.print("Nhap tuoi moi cua nhan vien: ");
-        int tuoi = input.nextInt();
-        staff.setTuoi(tuoi);
-        System.out.print("Nhap luong moi cua nhan vien: ");
-        int luong = input.nextInt();
-        staff.setLuong(luong);
+       public void updateStaff() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhap vi tri muon cap nhat: ");
+        int index = scanner.nextInt();
+        scanner.nextLine();
+        if (index<0 || index >= staffs.size()){
+            System.out.println("Vi tri khong phu hop !");
+        }else {
+            Staff staff = staffs.get(index);
+            System.out.print("Nhap vao ten moi cua nhan vien: ");
+            String name = scanner.nextLine();
+            staff.setName(name);
+            System.out.print("Nhap tuoi moi cua nhan vien: ");
+            int age = scanner.nextInt();
+            staff.setAge(age);
+            System.out.print("Nhap luong moi cua nhan vien: ");
+            double salary = scanner.nextDouble();
+            staff.setSalary(salary);
+            staffs.set(index, staff);
+        }
+    }
+    public void deleteStaff(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhap vao vi tri muon xoa: ");
+        int index = scanner.nextInt();
+        if (index < 0 || index >=staffs.size()){
+            System.out.println("Vi tri khong phu hop !");
+        }else {
+            staffs.remove(index);
+        }
+    }
+    public void displayStaff() {
+        for (Staff staff : staffs) {
+            System.out.println(staff);
+        }
     }
 
     public void displayOneStaff() {
-        System.out.println("Khong co du lieu");
-    }
-
-    public void displayStaff() {
-        for (Staff staff : staffs) {
-            if (staff != null) {
-                System.out.println(staff);
-            }
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhap vao vi tri can hien thi: ");
+        int index = scanner.nextInt();
+        if (index < 0 || index > staffs.size()){
+            System.out.println("Vi tri khong phu hop !");
+        }else {
+            System.out.println(staffs.get(index));
         }
-    }
-
-    public void deleteStaff() {
-        Staff[] newStaff = new Staff[staffs.length - 1];
-        for (int i = 0; i < staffs.length - 1; i++) {
-            if (i < index) {
-                newStaff[i] = staffs[i];
-            } else {
-                newStaff[i] = staffs[i + 1];
-            }
-        }
-        staffs = newStaff;
     }
 }
 
